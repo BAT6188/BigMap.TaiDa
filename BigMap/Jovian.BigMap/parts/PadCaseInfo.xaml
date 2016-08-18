@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="Jovian.BigMap.parts.PadCaseInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" d:DesignWidth="1920"
+             Style="{StaticResource BaseUCStyle}"
+             Tag="警情动态">
+    <UserControl.Resources>
+        <Style TargetType="ListView">
+            <Style.Setters>
+                <Setter Property="Background" Value="#FF2783bf"></Setter>
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+                <Setter Property="Foreground" Value="Black"></Setter>
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"></Setter>
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"></Setter>
+                <Setter Property="Margin" Value="5,5,5,5"></Setter>
+            </Style.Setters>
+
+        </Style>
+        <Style TargetType="ListViewItem">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="36"></Setter>
+                <Setter Property="Background" Value="#FF1A2D3C"></Setter>
+                <Setter Property="Foreground" Value="White"></Setter>
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"></Setter>
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"></Setter>
+                <Setter Property="Height" Value="61"></Setter>
+            </Style.Setters>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="ItemsControl.AlternationIndex" Value="1"></Condition>
+                        <Condition Property="IsSelected" Value="False"></Condition>
+                        <Condition Property="IsMouseOver" Value="False"></Condition>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="#EEEEEEEE"></Setter>
+                    <Setter Property="Foreground" Value="Black"></Setter>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+        
+        <Style TargetType="GridViewColumnHeader">
+            <Setter Property="Background" Value="Black"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot">
+        <!--<MediaElement Name="audio" Visibility="Hidden"/>
+        <MediaElement Name="audio2" Visibility="Hidden"/>-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="380"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+        
+        <ListView x:Name="lvCase" Grid.Row="0" FontSize="40" FontWeight="Bold" Width="Auto" Height="365" Background="Transparent" VerticalAlignment="Top" HorizontalAlignment="Left" AlternationCount="2">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="接警单" Width="450" DisplayMemberBinding="{Binding Path=JJDBH}"></GridViewColumn>
+                        <GridViewColumn Header="报警类别" Width="250" DisplayMemberBinding="{Binding Path=BJLBMC}"></GridViewColumn>
+                        <GridViewColumn Header="报警人" Width="200" DisplayMemberBinding="{Binding Path=BJRXM}"></GridViewColumn>
+                        <GridViewColumn Header="报警内容" Width="250" DisplayMemberBinding="{Binding Path=BJNR}"></GridViewColumn>
+                        <GridViewColumn Header="事发地址" Width="250" DisplayMemberBinding="{Binding Path=SFDZ}"></GridViewColumn>
+                        <GridViewColumn Header="时间" Width="400" DisplayMemberBinding="{Binding Path=BJSJ,StringFormat=''}"></GridViewColumn>
+                        
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" CornerRadius="20" Height="Auto" Width="Auto" Padding="20">
+                <Grid>
+                    <Grid.Effect>
+                        <DropShadowEffect ShadowDepth="10"></DropShadowEffect>
+                    </Grid.Effect>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="最新警情：" FontSize="40" Foreground="Wheat"></TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0" x:Name="tbJJDBH" Text="接警编号：" FontSize="40" Foreground="White"></TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="tbBJLBMC" Text="报警类别：" FontSize="40" Foreground="White"></TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="0" x:Name="tbBJRXM" Text="报警人：" FontSize="40" Foreground="White"></TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="1" x:Name="tbBJSJ" Text="报警时间：" FontSize="40" Foreground="White"></TextBlock>
+                    <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Text="报警内容：默认内容" FontSize="40" Foreground="White"></TextBlock>
+                    <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Text="事发地址：默认地址" FontSize="40" Foreground="White"></TextBlock>
+                </Grid>
+            </Border>
+        
+        </Grid>
+        <!---->
+    </Grid>
+</UserControl>

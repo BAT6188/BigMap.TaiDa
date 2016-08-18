@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="Jovian.BigMap.parts.PadReserviorInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Style="{StaticResource BaseUCStyle}"
+             Tag="水库信息-院桥镇人防（民防）志愿者队伍抢险抢修分队花名册"             
+             d:DesignHeight="1800" d:DesignWidth="2400">
+    <UserControl.Resources>
+        <Style TargetType="ListView">
+            <Style.Setters>
+                <Setter Property="Background" Value="Transparent"></Setter>
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+                <Setter Property="Foreground" Value="Black"></Setter>
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"></Setter>
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"></Setter>
+                <Setter Property="Margin" Value="0"></Setter>
+            </Style.Setters>
+
+        </Style>
+        <Style TargetType="ListViewItem">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="40"></Setter>
+                <Setter Property="Background" Value="Transparent"></Setter>
+                <Setter Property="Foreground" Value="White"></Setter>
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"></Setter>
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"></Setter>
+                <Setter Property="Height" Value="61"></Setter>
+            </Style.Setters>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="ItemsControl.AlternationIndex" Value="1"></Condition>
+                        <Condition Property="IsSelected" Value="False"></Condition>
+                        <Condition Property="IsMouseOver" Value="False"></Condition>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="#EEEEEEEE"></Setter>
+                    <Setter Property="Foreground" Value="Black"></Setter>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot">
+        <ListView x:Name="lstZYZ" Width="Auto" Height="Auto" Background="Transparent" FontSize="60">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="姓名" DisplayMemberBinding="{Binding Path=XM}" Width="200"></GridViewColumn>
+                        <GridViewColumn Header="姓别" DisplayMemberBinding="{Binding Path=XB}" Width="200"></GridViewColumn>
+                        <GridViewColumn Header="文化程度" DisplayMemberBinding="{Binding Path=WHCD}" Width="300"></GridViewColumn>
+                        <GridViewColumn Header="党团" DisplayMemberBinding="{Binding Path=DT}" Width="200"></GridViewColumn>
+                        <GridViewColumn Header="身份证" Width="360" x:Name="sfzh1">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=SFZH}" Width="360" FontSize="30" ></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="工作单位" Width="300">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=GZDW}" Width="300" FontSize="30" ></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="职务" Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=ZW}" Width="200" FontSize="30" ></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="联系电话" DisplayMemberBinding="{Binding Path=LXDH}" Width="350"></GridViewColumn>
+                        <GridViewColumn Header="短号" DisplayMemberBinding="{Binding Path=DH}" Width="200"></GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>

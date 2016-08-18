@@ -1,0 +1,13 @@
+﻿<Application x:Class="Jovian.BigMap.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml" Startup="Application_Startup">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="resources\BaseStyles.xaml"></ResourceDictionary><!--用户控件模板-->
+                <ResourceDictionary Source="resources\Symbols.xaml"></ResourceDictionary><!--定义各种地图所使用的符号等-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

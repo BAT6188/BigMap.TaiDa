@@ -1,0 +1,230 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:esri="http://schemas.esri.com/arcgis/client/2009">
+    <!--Buffer相关Symbol定义-->
+    <esri:SimpleLineSymbol x:Key="DrawLineSymbol" Color="Green" Width="4" />
+    <esri:SimpleFillSymbol x:Key="DrawFillSymbol" Fill="#3300FF00" BorderBrush="Green" BorderThickness="2" />
+    <esri:SimpleMarkerSymbol x:Key="DefaultMarkerSymbol" Color="Red" Size="12" Style="Circle" />
+    <esri:SimpleLineSymbol x:Key="DefaultLineSymbol" Color="Red" Width="4" />
+    <esri:SimpleFillSymbol x:Key="DefaultFillSymbol" Fill="#33FF0000" BorderBrush="Red" BorderThickness="2" />
+
+    <esri:SimpleFillSymbol x:Key="SearchCameras" Fill="#2244BB00" BorderBrush="Green" BorderThickness="2"/>
+
+    <!--LPY 2016-4-1 添加 红绿灯、道路相关-->
+    <esri:PictureMarkerSymbol x:Key="pmsGreenLight" OffsetX="32" OffsetY="64">
+        <esri:PictureMarkerSymbol.ControlTemplate>
+            <ControlTemplate>
+                <Grid>
+                    <Image Source="..\images\trafficlight\green64.png"></Image>
+                </Grid>
+            </ControlTemplate>
+        </esri:PictureMarkerSymbol.ControlTemplate>
+    </esri:PictureMarkerSymbol>
+    <esri:PictureMarkerSymbol x:Key="pmsYellowLight" OffsetX="32" OffsetY="64">
+        <esri:PictureMarkerSymbol.ControlTemplate>
+            <ControlTemplate>
+                <Grid>
+                    <Image Source="..\images\trafficlight\yellow64.png"></Image>
+                </Grid>
+            </ControlTemplate>
+        </esri:PictureMarkerSymbol.ControlTemplate>
+    </esri:PictureMarkerSymbol>
+    <esri:PictureMarkerSymbol x:Key="pmsRedLight" OffsetX="32" OffsetY="64">
+        <esri:PictureMarkerSymbol.ControlTemplate>
+            <ControlTemplate>
+                <Grid>
+                    <Image Source="..\images\trafficlight\red64.png"></Image>
+                </Grid>
+            </ControlTemplate>
+        </esri:PictureMarkerSymbol.ControlTemplate>
+    </esri:PictureMarkerSymbol>
+
+    <esri:SimpleLineSymbol x:Key="RoadFreeSymbol" Color="#CC00FD00" Width="20"></esri:SimpleLineSymbol>
+    <esri:SimpleLineSymbol x:Key="RoadNormalSymbol" Color="#CCFFFF00" Width="20"></esri:SimpleLineSymbol>
+    <esri:SimpleLineSymbol x:Key="RoadBusySymbol" Color="#CCFF4000" Width="20"></esri:SimpleLineSymbol>
+
+    <!--LPY 2015-3-25 添加 测距、测面积相关 2016-3-25 修改-->
+    <esri:TextSymbol x:Key="TxtSymbol" OffsetX="200" OffsetY="50">
+        <esri:TextSymbol.ControlTemplate>
+            <ControlTemplate>
+                <Border Background="Black" BorderBrush="Red" BorderThickness="2" CornerRadius="5" Opacity="0.75">
+                    <TextBlock Width="400" Height="48" FontSize="36" Foreground="White" TextAlignment="Center" Text="{Binding Attributes[Result]}"></TextBlock>
+                </Border>
+            </ControlTemplate>
+        </esri:TextSymbol.ControlTemplate>
+    </esri:TextSymbol>
+    <esri:SimpleFillSymbol x:Key="AreaSymbol" BorderBrush="Blue" BorderThickness="8">
+        <esri:SimpleFillSymbol.Fill>
+            <SolidColorBrush Opacity="0.5" Color="LightBlue"></SolidColorBrush>
+        </esri:SimpleFillSymbol.Fill>
+    </esri:SimpleFillSymbol>
+    <esri:SimpleLineSymbol x:Key="LengthSymbol" Color="Blue" Width="8" Style="Solid"></esri:SimpleLineSymbol>
+
+    <!--LPY 2016-4-2 添加 聚合图符号相关-->
+    <esri:SimpleMarkerSymbol x:Key="smsCluster" Color="#FF0000FF" Size="40" Style="Circle"></esri:SimpleMarkerSymbol>
+    <LinearGradientBrush x:Key="lgbCluster" MappingMode="RelativeToBoundingBox" >
+        <GradientStopCollection>
+            <GradientStop Color="Transparent" Offset="0"></GradientStop>
+            <GradientStop Color="Blue" Offset="0.25"></GradientStop>
+            <GradientStop Color="Green" Offset="0.5"></GradientStop>
+            <GradientStop Color="Yellow" Offset="0.75"></GradientStop>
+            <GradientStop Color="Red" Offset="1"></GradientStop>
+        </GradientStopCollection>
+    </LinearGradientBrush>
+
+    <!--定义案件点-->
+    <esri:MarkerSymbol x:Key="CrimePointSymbol" >
+        <esri:MarkerSymbol.ControlTemplate>
+            <ControlTemplate>
+                <Canvas>
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <Storyboard RepeatBehavior="Forever">
+                                    <DoubleAnimation BeginTime="0" Storyboard.TargetName="ellipse" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)" From="1" To="10" Duration="00:00:01" />
+                                    <DoubleAnimation BeginTime="0" Storyboard.TargetName="ellipse" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)" From="1" To="10" Duration="00:00:01" />
+                                    <DoubleAnimation BeginTime="0" Storyboard.TargetName="ellipse" Storyboard.TargetProperty="(UIElement.Opacity)" From="1" To="0" Duration="00:00:01" />
+                                </Storyboard>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                    <Ellipse Height="20" Width="20" Canvas.Left="-10" Canvas.Top="-10"  RenderTransformOrigin="0.5,0.5" x:Name="ellipse" IsHitTestVisible="False">
+                        <Ellipse.RenderTransform>
+                            <ScaleTransform />
+                        </Ellipse.RenderTransform>
+                        <Ellipse.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#00FF0000" />
+                                <GradientStop Color="#FFFF0000" Offset="0.25"/>
+                                <GradientStop Color="#00FF0000" Offset="0.5"/>
+                                <GradientStop Color="#FFFF0000" Offset="0.75"/>
+                                <GradientStop Color="#00FF0000" Offset="1"/>
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <!--Static symbol on top-->
+                    <Ellipse Height="20" Width="20" Canvas.Left="-10" Canvas.Top="-10" Fill="#FFFF0000" x:Name="ellipse1"/>
+                </Canvas>
+            </ControlTemplate>
+        </esri:MarkerSymbol.ControlTemplate>
+    </esri:MarkerSymbol>
+
+    <!--摄像头符号-->
+    <esri:PictureMarkerSymbol x:Key="pmsForCamerasLayer" OffsetX="24" OffsetY="48">
+        <esri:PictureMarkerSymbol.ControlTemplate>
+            <ControlTemplate>
+                <Grid Height="48" Width="48">
+                    <Image Source="..\images\symbols\camera48.png" ></Image>
+                </Grid>
+            </ControlTemplate>
+        </esri:PictureMarkerSymbol.ControlTemplate>
+    </esri:PictureMarkerSymbol>
+    <!--网吧符号-->
+    <esri:PictureMarkerSymbol x:Key="pmsForNetBarLayer" OffsetX="24" OffsetY="48">
+        <esri:PictureMarkerSymbol.ControlTemplate>
+            <ControlTemplate>
+                <Grid Height="48" Width="48">
+                    <Image Source="..\images\symbols\netbar48.png" ></Image>
+                </Grid>
+            </ControlTemplate>
+        </esri:PictureMarkerSymbol.ControlTemplate>
+    </esri:PictureMarkerSymbol>
+    <!--企业符号-->
+    <esri:PictureMarkerSymbol x:Key="pmsForCompanyLayer" OffsetX="24" OffsetY="48">
+        <esri:PictureMarkerSymbol.ControlTemplate>
+            <ControlTemplate>
+                <Grid Height="48" Width="48">
+                    <Image Source="..\images\symbols\company48.png" ></Image>
+                </Grid>
+            </ControlTemplate>
+        </esri:PictureMarkerSymbol.ControlTemplate>
+    </esri:PictureMarkerSymbol>
+    <!--银行符号-->
+    <esri:PictureMarkerSymbol x:Key="pmsForBankLayer" OffsetX="24" OffsetY="48">
+        <esri:PictureMarkerSymbol.ControlTemplate>
+            <ControlTemplate>
+                <Grid Height="48" Width="48">
+                    <Image Source="..\images\symbols\bank48.png" ></Image>
+                </Grid>
+            </ControlTemplate>
+        </esri:PictureMarkerSymbol.ControlTemplate>
+    </esri:PictureMarkerSymbol>
+    <!--加油站符号-->
+    <esri:PictureMarkerSymbol x:Key="pmsForGasolineLayer" OffsetX="24" OffsetY="48">
+        <esri:PictureMarkerSymbol.ControlTemplate>
+            <ControlTemplate>
+                <Grid Height="48" Width="48">
+                    <Image Source="..\images\symbols\gasoline48.png" ></Image>
+                </Grid>
+            </ControlTemplate>
+        </esri:PictureMarkerSymbol.ControlTemplate>
+    </esri:PictureMarkerSymbol>
+    <!--医院符号-->
+    <esri:PictureMarkerSymbol x:Key="pmsForHospitalLayer" OffsetX="24" OffsetY="48">
+        <esri:PictureMarkerSymbol.ControlTemplate>
+            <ControlTemplate>
+                <Grid Height="48" Width="48">
+                    <Image Source="..\images\symbols\hospital48.png" ></Image>
+                </Grid>
+            </ControlTemplate>
+        </esri:PictureMarkerSymbol.ControlTemplate>
+    </esri:PictureMarkerSymbol>
+
+    <!--案件符号-->
+    <esri:PictureMarkerSymbol x:Key="pmsForCase" OffsetX="192" OffsetY="104"><!--384/2,88+32/2-->
+        <esri:MarkerSymbol.ControlTemplate>
+            <ControlTemplate>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="88"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Width="384" Height="88">
+                        <Border BorderThickness="0" Width="Auto" Height="Auto" CornerRadius="20" Padding="5,0,5,0">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="Black" Offset="1"/>
+                                    <GradientStop Color="#FF68A8BD"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <StackPanel>
+                            <TextBlock Margin="2" Text="{Binding Attributes[BJSJ],StringFormat='时间：{0:yyyy-MM-dd HH:mm}'}" Foreground="White" FontSize="30"/>
+                            <TextBlock  Margin="2" Text="{Binding Attributes[BJLBMC],StringFormat='类型：{0}'}" Foreground="White"  FontSize="30"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                    <Image Margin="0,0,0,0"    Source="..\images\Case32.png" Grid.Row="1" Height="32" Width="32" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+                </Grid>
+            </ControlTemplate>
+        </esri:MarkerSymbol.ControlTemplate>
+    </esri:PictureMarkerSymbol>
+
+    <esri:MarkerSymbol x:Key="PoliceCarOnline" OffsetX="120" OffsetY="52">
+        <esri:MarkerSymbol.ControlTemplate>
+            <ControlTemplate>
+                <Grid x:Name="grid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="240"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="64"/>
+                    </Grid.RowDefinitions>
+                    <Border CornerRadius="8" Background="#FF001627">
+                        <Grid Margin="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock  TextAlignment="Center" Text="{Binding Attributes[TITLE],StringFormat='车牌号：{0}'}"  Foreground="White" FontSize="30" Margin="0" Grid.Row="0" Grid.Column="0"/>
+                        </Grid>
+                    </Border>
+                    <Image Source="..\images\PoliceCar64a.png" Grid.Row="1" Grid.Column="0" Width="64" Height="64" HorizontalAlignment="Center">
+                    </Image>
+                </Grid>
+            </ControlTemplate>
+        </esri:MarkerSymbol.ControlTemplate>
+    </esri:MarkerSymbol>
+</ResourceDictionary>
